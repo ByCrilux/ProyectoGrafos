@@ -1,0 +1,71 @@
+create database cuentasbancarias;
+use cuentasbancarias;
+create table cuenta(
+	nro_cuenta int primary key not null,
+    nombre_cliente varchar(255)
+);
+create table transaccion(
+	nro int not null auto_increment,
+	desde int not null,
+    hacia int not null,
+    importe decimal(12,2),
+    foreign key (desde) references cuenta(nro_cuenta),
+    foreign key (hacia) references cuenta(nro_cuenta),
+    primary key (nro, desde, hacia)
+);
+
+insert into cuenta values (111, 'carlos');
+insert into cuenta values (222, 'maria');
+insert into cuenta values (333, 'juan');
+insert into cuenta values(444, 'pedro');
+insert into cuenta values(555, 'miguel');
+
+insert into cuenta values (1010, 'BNB');
+insert into cuenta values (2020, 'BMSC');
+insert into cuenta values (3030, 'TIGO');
+insert into cuenta values (4040, 'CREE');
+insert into cuenta values (5050, 'SAGUAPAC');
+insert into cuenta values (1, 'demian');
+insert into cuenta values (2, 'yesenia');
+insert into cuenta values (3, 'andrea');
+-- carlos a cree
+insert into transaccion (desde, hacia, importe) values (111, 4040, 90);
+insert into transaccion (desde, hacia, importe) values (111, 4040, 130);
+insert into transaccion (desde, hacia, importe) values (111, 4040, 180);
+-- carlos a saguapac
+insert into transaccion (desde, hacia, importe) values (111, 5050, 50);
+insert into transaccion (desde, hacia, importe) values (111, 5050, 51);
+insert into transaccion (desde, hacia, importe) values (111, 5050, 63);
+-- carlos a tigo
+insert into transaccion (desde, hacia, importe) values (111, 3030, 179);
+insert into transaccion (desde, hacia, importe) values (111, 3030, 249);
+insert into transaccion (desde, hacia, importe) values (111, 3030, 49);
+-- carlos a migiel
+insert into transaccion (desde, hacia, importe) values (111, 555, 5000);
+
+-- maria a bmsc
+insert into transaccion (desde, hacia, importe) values (222, 2020, 1200);
+insert into transaccion (desde, hacia, importe) values (222, 2020, 1200);
+insert into transaccion (desde, hacia, importe) values (222, 2020, 1200);
+
+-- maria a tigo
+insert into transaccion (desde, hacia, importe) values (222, 3030, 129);
+insert into transaccion (desde, hacia, importe) values (222, 3030, 129);
+-- maria a saguapac
+insert into transaccion (desde, hacia, importe) values(222, 5050, 37);
+insert into transaccion (desde, hacia, importe) values(222, 5050, 47);
+-- maria a juan 
+insert into transaccion (desde, hacia, importe) values(222, 333, 100);
+-- maria a pedro
+insert into transaccion (desde, hacia, importe) values(222, 444, 100);
+-- juan a banco
+insert into transaccion (desde, hacia, importe) values(333, 1010, 950);
+-- bnb a emp
+insert into transaccion (desde, hacia, importe) values(1010, 1, 2800);
+insert into transaccion (desde, hacia, importe) values(1010, 3, 4800);
+
+-- mbsc a seguridad
+insert into transaccion (desde, hacia, importe) values(2020, 333, 3000);
+-- tigo a yesenia
+insert into transaccion (desde, hacia, importe) values(3030, 2, 1444);
+select  from transaccion;
